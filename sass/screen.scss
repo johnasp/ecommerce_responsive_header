@@ -1,0 +1,653 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+
+/* VARs */
+
+$smallWrap: 99%;
+$midWrap: 95%;
+$largeWrap: 80%;  
+$gutter: 12px;
+$menuOffset: 2%;
+
+$cta: #ba0047; 
+$hover: lighten($cta, 5%);
+$secondary: #000;
+$lightGrey: #e1e1e1;
+$midGrey: lighten(#4e4e4e,15%);
+$darkGrey: #404040;
+$search: $midGrey;
+$innerNavBG: lighten($cta,30%);
+$brandNavButtonBG: #fff;
+$brandNavButtonText: #000;
+$brandNavButtonTextHover: #fff;
+$secondaryNavBG: #fff;
+
+
+/* MIXINs */
+@mixin breakpoint($point) {
+  @if $point == 480 {
+    @media (min-width: 480px) { @content; }
+  }
+  @else if $point == 550 {
+    @media (min-width: 550px) { @content; }
+  }
+  @else if $point == phablet  {
+    @media (min-width: 480px) and (max-width: 768px) { @content; }
+  }  
+  @else if $point == 600 {
+    @media (min-width: 600px) { @content; }
+  }
+  @else if $point == 700 {
+    @media (min-width: 700px) { @content; }
+  }
+  @else if $point == 768 {
+    @media (min-width: 768px) { @content; }
+  }
+  @else if $point == 820 {
+    @media (min-width: 768px) { @content; }
+  }
+	@else if $point == 900 {
+    @media (min-width: 900px) { @content; }
+  }	
+  @else if $point == 1024 {
+    @media (min-width: 1024px)  { @content; }
+  }
+  @else if $point == 1100 {
+    @media (min-width: 1100px)  { @content; }
+  }
+  @else if $point == 1200 {
+    @media (min-width: 1200px)  { @content; }
+  }
+  @else if $point == 1300 {
+    @media (min-width: 1300px)  { @content; }
+  }
+}
+@mixin metaNav() { 
+  color: $midGrey;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+@mixin wrapper() {
+  width: $smallWrap;
+  margin: 0 auto;
+  @include breakpoint(600) {width: $midWrap;} 
+  @include breakpoint(1024) {width: $largeWrap;} 
+}
+@mixin canvasIcon() {
+    fill: white;
+    width: 25px;
+    float: right;
+    margin-top: -1px;
+}
+
+
+/* =========================================
+=            SITE WIDE STYLES           
+/* ========================================*/
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+* {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+img { max-width: 100%;}
+body { font-family: 'Open Sans', sans-serif;}
+.supersites {
+  background: $midGrey;
+  margin-bottom: 6px;
+  @include breakpoint(768) {margin-bottom: $gutter;}
+  section { 
+    padding-top: 3px;
+    @include wrapper();    
+    .tel {
+      display: none;  
+      @include breakpoint(600) {
+        display: block;
+      } 
+      width: 30%;
+      float: left;
+      text-align: right;
+      line-height: 0.8em;
+      color: white;
+      svg {
+        fill: white;
+        width: 17px; 
+        display: inline-block;
+      }
+      a {
+        color: white;
+        display: inline-block;
+        font-weight: bold;
+        font-size: 22px; 
+      }
+      span {
+        display: none;  
+        @include breakpoint(768) {display: block;} 
+        font-size: 11px;
+      }
+    }   
+    nav {  
+      text-transform: uppercase;
+      font-size: 0;   
+      width: 100%;
+      @include breakpoint(600) { 
+        width: 70%;  
+      }  
+      float: left;
+      div.use {
+        display: inline-block
+      }
+      a {
+        background: $lightGrey; 
+        &:hover { background: $lightGrey;}
+        padding: 8px;
+        color: $darkGrey;
+        margin: 4px 2px 0 0;
+        display: inline-block;
+        font-size: 10px;
+        @include breakpoint(768) {font-size: 14px;}
+        border-radius: 4px 4px 0 0;
+        &.hec span {
+          display: none;
+          @include breakpoint(480) {display: inline;}
+        }
+        &.current {
+          color: black;
+          background: white;
+        }
+      }
+    }
+  }
+}
+/* =========================================
+=            INNER HEADER + LOGO           =
+/* ========================================*/
+.inner {
+  @include wrapper(); 
+  .logo {
+    width: 28%;
+    float: left;
+    margin-top: 0px;
+    @include breakpoint(600) {margin-top: 33px;} 
+    svg {      
+      @include breakpoint(1300) { width: 267px;}  
+       @include breakpoint(700) { width: 190px;} 
+    } 
+  }
+  
+/* =========================================
+=           MY ACCOUNT LINKS            =
+/* ========================================*/
+  .account {
+    width: 72%;
+    float: left;
+    nav {
+      float: right;
+      display: block; 
+      margin-bottom: $gutter;
+      padding-left: 10px;
+      a {
+        @include metaNav();
+        padding: 0 $gutter/2 0 $gutter/2;
+        @incude breakpoint(600) {padding: 0 $gutter 0 $gutter;}
+        &:hover {
+          text-decoration: underline;
+        }
+        &:last-child {
+          border: none;
+          padding-right: 0;
+        }
+        &.sign-in {
+          display: none;
+        }
+        @include breakpoint(768) {
+          &.sign-in {
+            display: inline; 
+          }
+        }
+      }
+    }
+ /* =========================================
+=            SEARCH          =
+/* ========================================*/   
+   .searchCheck {
+     clear: both;
+     .searchForm {
+       width:100%;
+       float: left; 
+       min-height: 30px;  
+       form {
+         display: inline; 
+       }
+       input {
+        padding: 6px;
+         font-size: 12px;
+         width: 45%;
+         border: 1px solid $lightGrey;
+         float: left;
+         height: 36px;
+         background: lighten($lightGrey, 10%);
+         margin-left: 8%;
+         @include breakpoint(550) {margin-left: 2%;}
+       } 
+       button {  
+         font-size: 14px;
+         border-radius: 0;
+         background: #000;
+         border: none;
+         float: left;
+         display: inline-block;
+         height: 36px;
+         svg {
+           width: 24px;
+           fill: white;
+         }
+        } 
+   }
+  }  
+}
+  /* =========================================
+=            CHECKOUT BUTTON           =
+/* ========================================*/
+.checkout {
+    svg {
+      width: 20px;  
+      margin-top: -1px;
+      float: left;
+      margin-right: 5px;
+    }  
+   .bag {
+      display: none;
+      font-size: 14px;
+      background: $lightGrey;
+      padding: 9px;  
+      float: right;
+      @include breakpoint(700) {display: inline;}  
+      span {
+        display: none;
+        @include breakpoint(1100) {display: inline;} 
+      }
+    }
+    .out {
+      font-size: 14px; 
+      background: #000;
+      &:hover {
+        background: $hover;
+        color: #fff;
+      }
+      padding: 9px; 
+      float: right;
+      color: white;
+      fill: white;
+      .text {display: none;}  
+      @include breakpoint(700) {
+         svg {display:none;}
+        .text {display: inline;}
+        .items {display: none;}
+      }
+    }
+  }
+}
+/* =========================================
+=            MAIN NAV 
+/* ========================================*/
+
+.site-menu {
+  padding-top: $gutter;
+  display: block; 
+  clear: both; 
+  font-size: 0;
+  @include wrapper();    
+  svg {
+  	display:none;
+  }  
+  .close-text, .close {display: none;}  
+  .hamburger {display: inline;}
+  ul { 
+    display: none;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    @include breakpoint(600) {
+      display: block;
+    }
+    position: relative;
+    padding: 0;
+    margin: 0;
+    li {
+      border-right: 1px solid white;
+      display: block;
+    
+      @include breakpoint(600) {
+        display: inline-block;
+        width: (100% / 4); 
+        &:nth-child(4) {border-right: none;}
+      }
+      @include breakpoint(900) {
+        width: (100% / 8);
+        &:nth-child(4) {border-right: 1px solid #fff;}
+      }      
+      > a {
+        display: block;
+        width: 100%;
+        background: $brandNavButtonBG;
+        color: $brandNavButtonText;
+        &:hover {
+          background: $cta;
+          color: $brandNavButtonTextHover;
+        }
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 15px;
+      }
+    } 
+    .inner-nav {
+      display: none;
+      > a { padding: 8px;}
+      a:hover {
+        text-decoration: underline;
+      }
+    } 
+  } 
+}  	
+
+.toggle-nav {  
+	display: inline-block;
+	width: 100%; 
+	padding: 6px; 
+	line-height: 1.6em; 
+	background: black;
+	color: white;
+	font-size: 14px;
+  text-align: center;
+	svg {
+	  width: 20px;
+	  fill: white;
+	  float: left;
+	  display: inline;
+	  .close-text {display: none;}      
+	}  
+	@include breakpoint(600) {
+	  display: none; 
+	}
+} 
+
+/* =========================================
+=            META NAV 
+/* ========================================*/
+
+.meta-nav {
+  display: none;
+  @include breakpoint(600) {display: block;}
+  float: right;
+      margin-top: 10px;
+  a {
+    @include metaNav();
+    font-size: 11px;
+    padding: 0 8px;
+    border-right: 1px solid $lightGrey;
+    &:last-child {border:none; padding-right: 0;}
+    &:hover {text-decoration: underline;}
+  }
+}
+/* =========================================
+=            SECONDARY NAV 
+/* ========================================*/
+
+.secondary-nav {
+  @include wrapper();
+  font-size: 0;
+  display: none;
+  @include breakpoint(480) {display: block;}
+  a {
+    background: $secondaryNavBG;
+    display: inline-block;
+    color: $secondary;
+    padding: 6px 8px;
+    font-size: 12px;
+    width: 100%;
+    border-bottom: 1px solid #fff;
+    @include breakpoint(480) {width: (100%/2); border-bottom: none;}
+    @include breakpoint(900) {width: (100%/4);}
+    text-align: center;
+    text-transform: uppercase;
+
+    &::after { content: " >";}
+    &:hover {text-decoration: underline;}
+  }
+}
+
+/* =========================================
+=            TERTIARY NAV 
+/* ========================================*/
+
+.tertiary-nav {
+  display: none;
+  @include breakpoint(480) {display: block;}
+  @include wrapper();
+  padding: 6px;
+  background: lighten($cta,60%);
+  text-align: center;
+  margin-top: 6px;
+  a {
+    color: darken($cta,20%);
+    font-size: 14px;
+    
+    text-transform: uppercase;
+  }
+}
+
+/* =========================================
+            DESKTOP HOVER           
+/* ========================================*/
+
+ 
+.desktop .header {
+  padding: 8px;
+}
+.desktop .site-menu li {
+  &:last-child {
+    border-right: none;  
+  }
+  &:first-child {
+    border-bottom: 1px solid white;
+    @include breakpoint(900) {
+      border-bottom: none;
+    }
+  }
+  &:hover .inner-nav {
+    display: block;
+    border: 3px solid $cta;
+    position: absolute;
+    left: 0;
+    width: 100%;
+      padding: 8px;
+    @include breakpoint(900) {width: initial;}
+    background: #fff;
+    a {
+      background: none;
+      color: #000;
+      text-transform: capitalize;
+      display: inline;
+      font-size: 13px;
+    } 
+    span.heading {
+      text-transform: uppercase;
+      font-weight: bold;
+      color: darken($cta, 25%);
+      font-size: 15px;
+      display: block;
+      text-align: left;
+    }  
+    .col {
+      float: left;
+      width: 33%;
+      padding: 0 10px;
+    }
+    .featured {
+      width: 34%;
+      border-bottom: none;
+    }
+    li {
+      display: block; 
+      width: 100%;
+      padding: 4px;
+    }
+  }
+}
+
+@for $i from 1 through 8 {
+  .desktop .site-menu li:nth-child(#{$i}) .inner-nav {
+    @if $i == 1 {
+      left: 0;
+    }
+    @else {
+      @include breakpoint(900) {
+        @if $i == 6 {
+          left: 8% * $i!important;
+        }
+        @if $i == 7 {
+          left: 10% * $i;
+        }
+        @else {
+          left: 5% * $i;
+        }
+      }
+    }
+  }
+}
+
+/* =========================================
+            OFF CANVAS INITIALISERS            
+/* ========================================*/
+
+.site-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 2000px; /* Temp: Simulates a tall page. */
+}
+.site-canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    -webkit-transition: .3s ease all;
+    transition: .3s ease all;
+}
+/* =========================================
+=            OFF CANVAS ONLY           =
+/* ========================================*/
+
+.off-canvas .site-menu {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -300px;
+    background: white;
+    padding-top: 0;
+    ul {border: none;}
+    ul.inner-nav li a {
+      padding: 10px;
+      border-bottom: 1px solid $lightGrey!important;
+      background: #fff;
+      color: $darkGrey;
+      text-transform: capitalize;
+      font-size: 13px;
+    }
+    li {
+      width: 100%;
+      border-right: none!important; 
+    }
+    .main-nav {display: block;}
+    svg.hamburger {
+      padding-top:4px;
+    }
+    .close-text {
+      display: inline; 
+      padding-right: 5px;
+      svg.jdw-logo {
+        float: left;
+        width: 80px;
+      }
+    }  
+    .opened {
+      .plus {display:none;}  
+      .minus {display:inline;}  
+     }
+    span.heading {
+      text-transform: uppercase;
+      font-weight: bold;
+     
+      font-size: 14px;
+      display: block;
+      text-align: left;
+      padding: 4px 10px;
+      background: #e1e1e1;
+    } 
+    a {
+      .browse-cats {display: none;}      
+      display: block;
+      width: 100%;
+      border-bottom: 1px solid $darkGrey;    
+      text-align: left;
+      &:hover { background: #fff; color: $darkGrey;}
+      &.toggle-nav {
+        background: #000;
+        height: 42px; 
+        text-align: left;
+        padding-right: 7px;  
+        padding-left: 10px; 
+        line-height: 1.3em;
+        svg {
+          @include canvasIcon(); 
+          margin: -2px 5px 0 0; 
+        }
+        .menu {display:none;}
+        .close {display:inline;}
+      }
+      &.header {
+        padding: 12px;
+      }
+      svg {
+        @include canvasIcon();
+        fill: $darkGrey;
+        &.minus {display: none;}
+      }
+    }
+   .expand {
+      display: block; 
+      a {
+        background: #fff;
+        color: $darkGrey;
+        text-transform: capitalize;
+       }
+     }
+}
+.site-wrapper.off-canvas .site-canvas {
+    -webkit-transform: translateX(300px);
+    transform: translateX(300px);
+}
+.off-canvas .site-menu svg {  
+  display: block;  
+} 
+nav.expand {
+   transition: height 1s;
+}
+
+
+
+
+
+
